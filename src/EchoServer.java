@@ -9,16 +9,21 @@ import java.net.Socket;
  * Created by dbrown on 1/5/2015.
  */
 public class EchoServer {
-    public static void main(String[]args) throws IOException{
+    public static void main(String[] args) throws IOException {
         ServerSocket ss = new ServerSocket(30000);
 
-        Socket sock = ss.accept();
+        while (true) {
+            Socket sock = ss.accept();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-        PrintWriter pw = new PrintWriter(sock.getOutputStream(),true);
+            BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            PrintWriter pw = new PrintWriter(sock.getOutputStream(), true);
 
-        pw.println(br.readLine());
-        
+            String toReturn = br.readLine();
+            System.out.println(toReturn);
+
+            pw.println(br.readLine());
+        }
+
 
     }
 }
